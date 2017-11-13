@@ -16,7 +16,7 @@ __maintainer__ = "Damien Bouvier"
 __version__ = "0.1"
 __author_email__ = 'bouvierdamien@gmail.fr'
 
-# from . import mathbox
+from . import mathbox
 # from . import savebox
 # from . import plotbox
 # from . import utilities
