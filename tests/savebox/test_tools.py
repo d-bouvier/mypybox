@@ -71,6 +71,7 @@ class CheckPathTestCase(unittest.TestCase):
         for path in self.inputs.keys():
             if os.path.isdir(path) and (path != FILE_FOLDER):
                 os.removedirs(path)
+        os.chdir(self.old_cwd)
 
 
 #==============================================================================
