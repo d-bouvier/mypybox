@@ -46,17 +46,17 @@ class CheckPathTestCase(unittest.TestCase):
         self.folders2delete = [os.path.join(self.cwd, 'folder'),
                                os.path.join(self.cwd, 'hierarchal_folder')]
 
-    def test_return_type(self):
+    def test_returns_a_string(self):
         for path, input_val in self.inputs.items():
             with self.subTest(i=path):
                 self.assertIsInstance(savebox._check_path(input_val), str)
 
-    def test_return_is_abs(self):
+    def test_returned_path_is_absolute(self):
         for path, input_val in self.inputs.items():
             with self.subTest(i=path):
                 self.assertTrue(os.path.isabs(savebox._check_path(input_val)))
 
-    def test_path_validity(self):
+    def test_returned_path_is_valid(self):
         for path, input_val in self.inputs.items():
             with self.subTest(i=path):
                 result = savebox._check_path(input_val)
