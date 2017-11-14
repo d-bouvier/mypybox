@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Test script for mytoolbox/mathbox/mathbox.py
+Test script for mypybox/mathbox/mathbox.py
 
 Notes
 -----

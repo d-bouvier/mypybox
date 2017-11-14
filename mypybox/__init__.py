@@ -7,13 +7,13 @@ Notes
 @author: bouvier (bouvier@ircam.fr)
          Damien Bouvier, IRCAM, Paris
 
-Last modified on 13 Nov. 2017
+Last modified on 14 Nov. 2017
 Developed for Python 3.6.1
 """
 
 __author__ = "Damien Bouvier"
 __maintainer__ = "Damien Bouvier"
-__version__ = "0.1"
+__version__ = "0.2"
 __author_email__ = 'bouvierdamien@gmail.fr'
 
 from . import mathbox
@@ -21,4 +21,4 @@ from . import savebox
 from . import plotbox
 from . import utilities
 
-__all__ = [] # ['mathbox', 'savebox', 'plotbox', 'utilities']
+__all__ = ['mathbox', 'savebox', 'plotbox', 'utilities']
