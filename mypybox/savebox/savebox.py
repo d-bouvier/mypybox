@@ -82,9 +82,10 @@ def save_data(data, name, path=None, mode='pickle'):
 
     if mode == 'pickle':
         if not isinstance(data, dict):
-            data = {'data': data}
+            raise_error()
         full_path += _pickle_extension
-        pickle.dump(data, open(full_path, 'wb'))
+        with open(full_path, 'wb') as file:
+            pickle.dump(data, file)
 
     elif mode == 'npy':
         if not isinstance(data, np.ndarray):
@@ -143,7 +144,8 @@ def load_data(name, path=None):
         if is_numpy:
             return np.load(full_path + _numpy_extension)
         if is_pickle:
-            return pickle.load(open(full_path + _pickle_extension, 'rb'))
+            with open(full_path + _pickle_extension, 'rb') as file:
+                return pickle.load(file)
     else:
         list_extensions = []
         if is_numpy_binary:
