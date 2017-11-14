@@ -40,7 +40,12 @@ from .tools import _check_path
 _numpy_binary_extension = '.npy'
 _numpy_extension = '.npz'
 _pickle_extension = ''
-_extensions = [_numpy_binary_extension, _numpy_extension, _pickle_extension]
+_save_modes = {'pickle': _pickle_extension,
+               'npy': _numpy_binary_extension,
+               'npz': _numpy_extension,
+               'comp-npz': _numpy_extension}
+_figure_default_extension = '.png'
+_animation_default_extension = '.mp4'
 
 
 #==============================================================================
@@ -173,7 +178,7 @@ def save_figure(handle_figure, name, path=None, **args):
     full_path = os.path.join(_check_path(path), name)
 
     if ext == '':
-        full_path += '.png'
+        full_path += _figure_default_extension
 
     handle_figure.savefig(full_path, bbox_inches='tight', **args)
 
@@ -199,5 +204,5 @@ def save_animation(handle_animation, name, path=None, fps=None, **args):
     full_path = os.path.join(_check_path(path), name)
 
     if ext == '':
-        full_path += '.mp4'
+        full_path += _animation_default_extension
     handle_animation.save(full_path, fps=fps, **args)
