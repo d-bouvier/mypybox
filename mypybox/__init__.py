@@ -18,7 +18,7 @@ __author_email__ = 'bouvierdamien@gmail.fr'
 
 from . import mathbox
 from . import savebox
-# from . import plotbox
+from . import plotbox
 # from . import utilities
 
 __all__ = [] # ['mathbox', 'savebox', 'plotbox', 'utilities']
