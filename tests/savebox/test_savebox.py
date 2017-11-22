@@ -7,7 +7,7 @@ Notes
 @author: bouvier (bouvier@ircam.fr)
          Damien Bouvier, IRCAM, Paris
 
-Last modified on 14 Nov. 2017
+Last modified on 22 Nov. 2017
 Developed for Python 3.6.1
 """
 
@@ -74,10 +74,9 @@ class SaveDataTestCase(unittest.TestCase):
     def test_error_raised_if_wrong_mode(self):
         for mode, input_val in self.input_var.items():
             with self.subTest(i=mode):
-                def func():
-                    savebox.save_data(input_val['data_wrong'],
-                                      input_val['name'], mode=mode)
-                self.assertRaises(TypeError, func)
+                self.assertRaises(TypeError, savebox.save_data,
+                                  input_val['data_wrong'], input_val['name'],
+                                  mode=mode)
 
     def tearDown(self):
         for values in self.input_var.values():
