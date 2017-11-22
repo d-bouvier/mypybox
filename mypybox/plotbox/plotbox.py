@@ -370,7 +370,9 @@ def time_kernel(vec, kernel, style='wireframe', title=None, nb_levels=20,
                                          interval=100, blit=False)
 
     else:
-        print('No plot possible, the kernel is of order {}.'.format(order))
+        raise ValueError('Shape mismatch: the kernel is of order ' +
+                         '{0} (array has {0} dimensions), '.format(order) +
+                         'should be less or equal to 3.')
 
     return handle
 
@@ -483,6 +485,8 @@ def freq_kernel(vec, kernel, style='wireframe', title=None, db=True,
         ax2.set_xlim([0, vec[-1]])
 
     else:
-        print('No plot possible, the kernel is of order {}.'.format(order))
+        raise ValueError('Shape mismatch: the kernel is of order ' +
+                         '{0} (array has {0} dimensions), '.format(order) +
+                         'should be less or equal to 2.')
 
     return handle
