@@ -107,9 +107,8 @@ def safe_db(num, den):
     else:
         _den = den
 
-    # Assert same shape
-    assert _num.shape == _den.shape, 'Dimensions of num and den not equal' + \
-        ' (they are respectively {} and {}).'.format(_num.shape, _den.shape)
+    # Broadcast arrays
+    _num, _den = np.broadcast_arrays(_num, _den)
 
     if _num.shape == ():
         if _num == 0:

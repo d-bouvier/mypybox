@@ -80,27 +80,25 @@ class SafedbTestCase(unittest.TestCase):
         self.assertEqual(mathbox.safe_db(0, 0), - np.Inf)
 
     def test_output_type(self):
-        array = np.ones((2, 1))
+        array = np.ones((2))
         tests_map = {'int_int': (1, 1, float),
                      'float_float': (1., 1., float),
                      'float_int': (1., 1, float),
                      'int_float': (1, 1., float),
                      'list_list': ([1, 1], [1, 1], np.ndarray),
+                     'list_array': ([1, 1], array, np.ndarray),
+                     'array_list': (array, [1, 1], np.ndarray),
                      'array_array': (array, array, np.ndarray)}
         for name, (num, den, out_type) in tests_map.items():
             with self.subTest(name=name):
                 self.assertIsInstance(mathbox.safe_db(num, den), out_type)
 
     def test_wrong_shape_error(self):
-        array = np.ones((2, 1))
-        tests_map = {'array_num': (array, 1, np.ndarray),
-                     'num_array': (1, array, np.ndarray),
-                     'num_list': (1, [1, 1], np.ndarray),
-                     'list_num': ([1, 1], 1, np.ndarray),
-                     'list3_list2': ([1, 1, 1], [1, 1], np.ndarray)}
-        for name, (num, den, out_type) in tests_map.items():
-            with self.subTest(name=name) and self.assertRaises(AssertionError):
-                mathbox.safe_db(num, den)
+        tests_map = {'list3_list2': ([1, 1, 1], [1, 1]),
+                     'num3_num2': (np.ones((3, 1)), np.ones((2, 1)))}
+        for name, (num, den) in tests_map.items():
+            with self.subTest(name=name):
+                self.assertRaises(ValueError, mathbox.safe_db, num, den)
 
 
 class BinomialTestCase(unittest.TestCase):
