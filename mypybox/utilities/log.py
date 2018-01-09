@@ -18,11 +18,8 @@ make_header :
 
 Notes
 -----
-@author: bouvier (bouvier@ircam.fr)
-         Damien Bouvier, IRCAM, Paris
-
-Last modified on 14 Nov. 2017
 Developed for Python 3.6.1
+@author: d-bouvier (bouvierdamien@gmail.com)
 """
 
 #==============================================================================
