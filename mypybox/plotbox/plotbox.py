@@ -267,7 +267,7 @@ def spectrogram(signal, title=None, db=True, logscale=False, phase=False,
 
 
 def time_kernel(vec, kernel, style='wireframe', title=None, nb_levels=20,
-                set_zlim=True):
+                set_zlim=True, antialiased=False):
     """
     Plots a discrete time kernel of order 1, 2 or 3.
 
@@ -313,7 +313,8 @@ def time_kernel(vec, kernel, style='wireframe', title=None, nb_levels=20,
             plt.ylabel('Time (s)')
         elif style == 'surface':
             ax = handle.add_subplot(111, projection='3d')
-            surf = ax.plot_surface(time_x, time_y, kernel, antialiased=True,
+            surf = ax.plot_surface(time_x, time_y, kernel,
+                                   antialiased=antialiased,
                                    cmap='jet', rstride=1, cstride=1)
             plt.colorbar(surf, extend='both')
             ax.set_xlabel('Time (s)')
@@ -323,8 +324,8 @@ def time_kernel(vec, kernel, style='wireframe', title=None, nb_levels=20,
             ax.set_ylim([vec[0], vec[-1]])
         elif style == 'wireframe':
             ax = handle.add_subplot(111, projection='3d')
-            ax.plot_wireframe(time_x, time_y, kernel, antialiased=True,
-                              cmap='jet')
+            ax.plot_wireframe(time_x, time_y, kernel,
+                              antialiased=antialiased, cmap='jet')
             ax.set_xlabel('Time (s)')
             ax.set_ylabel('Time (s)')
             ax.set_zlabel('Amplitude')
@@ -351,14 +352,14 @@ def time_kernel(vec, kernel, style='wireframe', title=None, nb_levels=20,
 
         current_slice = kernel[:, :, 0]
         line = ax.plot_wireframe(time_x, time_y, current_slice,
-                                 antialiased=True, cmap='jet')
+                                 antialiased=antialiased, cmap='jet')
         set_axes()
 
         def animate_frame(ind, current_slice, line):
             ax.clear()
             current_slice = kernel[:, :, ind]
             line = ax.plot_wireframe(time_x, time_y, current_slice,
-                                     antialiased=True, cmap='jet')
+                                     antialiased=antialiased, cmap='jet')
             set_axes()
             return line,
 
@@ -376,7 +377,8 @@ def time_kernel(vec, kernel, style='wireframe', title=None, nb_levels=20,
 
 
 def freq_kernel(vec, kernel, style='wireframe', title=None, db=True,
-                logscale=False, unwrap_angle=True, nb_levels=20):
+                logscale=False, unwrap_angle=True, nb_levels=20,
+                antialiased=False):
     """
     Plots a discrete transfer kernel of order 1 or 2.
 
@@ -446,18 +448,18 @@ def freq_kernel(vec, kernel, style='wireframe', title=None, db=True,
             ax1 = handle.add_subplot(211, projection='3d')
             ax2 = handle.add_subplot(212, projection='3d')
             ax1.plot_surface(freq_x, freq_y, kernel_amp[idx, :],
-                             antialiased=True, cmap='jet',
+                             antialiased=antialiased, cmap='jet',
                              rstride=1, cstride=1)
             ax2.plot_surface(freq_x, freq_y, kernel_phase[idx, :],
-                             antialiased=True, cmap='jet',
+                             antialiased=antialiased, cmap='jet',
                              rstride=1, cstride=1)
         if style == 'wireframe':
             ax1 = handle.add_subplot(211, projection='3d')
             ax2 = handle.add_subplot(212, projection='3d')
             ax1.plot_wireframe(freq_x, freq_y, kernel_amp[idx, :],
-                               antialiased=True)
+                               antialiased=antialiased)
             ax2.plot_wireframe(freq_x, freq_y, kernel_phase[idx, :],
-                               antialiased=True)
+                               antialiased=antialiased)
 
         if style == 'contour':
             ax2.set_xlabel('Frequency (Hz)')
