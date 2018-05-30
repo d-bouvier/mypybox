@@ -115,14 +115,15 @@ def time_sig(vec, signal, title=None, title_plots=None, xlim=[None, None],
         Set the y limits of all subplots. By default autoscaling is used.
     """
 
-    complex_bool = 'complex' in str(signal.dtype)
+    _signal = signal.copy()
+    complex_bool = 'complex' in str(_signal.dtype)
 
-    shape = signal.shape
+    shape = _signal.shape
     assert len(shape) <= 2, 'Signal has {} dimensions,'.format(len(shape)) + \
         ' should be less or equal than 2.'
     if len(shape) == 1: # Mono-dimensional case
         nb_sig = 1
-        signal.shape = (1, shape[0])
+        _signal.shape = (1, shape[0])
     elif len(shape) == 2: # Multi-dimensional case
         nb_sig = shape[0]
 
@@ -137,19 +138,19 @@ def time_sig(vec, signal, title=None, title_plots=None, xlim=[None, None],
     if complex_bool:
         for n in range(nb_sig):
             plt.subplot(nb_sig, 2, 2*n+1)
-            plt.plot(vec, signal[n].real, 'b')
+            plt.plot(vec, _signal[n].real, 'b')
             plt.title(title_plots[n] + ' - real part')
             plt.xlim(xlim)
             plt.ylim(ylim)
             plt.subplot(nb_sig, 2, 2*n+2)
-            plt.plot(vec, signal[n].imag, 'r')
+            plt.plot(vec, _signal[n].imag, 'r')
             plt.title(title_plots[n] + ' - imaginary part')
             plt.xlim(xlim)
             plt.ylim(ylim)
     else:
         for n in range(nb_sig):
             plt.subplot(nb_sig, 1, n+1)
-            plt.plot(vec, signal[n], 'b')
+            plt.plot(vec, _signal[n], 'b')
             plt.title(title_plots[n])
             plt.xlim(xlim)
             plt.ylim(ylim)
